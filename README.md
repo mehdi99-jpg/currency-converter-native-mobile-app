@@ -27,22 +27,7 @@ It features:
 
 The project follows a standard **Model-View-Controller (MVC)** architectural pattern:
 
-```mermaid
-graph LR
-    subgraph View (XML Layouts)
-        V[activity_main.xml]
-    end
-    subgraph Controller (Java)
-        C[MainActivity.java]
-    end
-    subgraph Model (Data & Logic)
-        M[ArrayList / Conversion Logic]
-    end
-    V -->|User Action| C
-    C -->|Updates UI| V
-    C -->|Saves data| M
-    M -->|Supplies history| C
-```
+
 
 ---
 
