@@ -23,11 +23,39 @@ It features:
 
 ---
 
+
 ## 🛠️ Architectural Breakdown
 
 The project follows a standard **Model-View-Controller (MVC)** architectural pattern:
 
+```mermaid
+graph TD
+    subgraph ViewSub ["View (XML Layouts)"]
+        V[activity_main.xml]
+    end
+    subgraph ControllerSub ["Controller (Java)"]
+        C[MainActivity.java]
+    end
+    subgraph ModelSub ["Model (Data & Logic)"]
+        M["ArrayList (History Log) & Conversion Logic"]
+    end
+    V -->|User input & actions| C
+    C -->|Updates UI view elements| V
+    C -->|Appends history data| M
+    M -->|Provides list items| C
+```
 
+Here is how each component is mapped to the codebase:
+
+*   **Model (Data & Logic)**:
+    *   **Data Structure**: A simple `ArrayList<String>` in `MainActivity` serves as our model storing the session history log.
+    *   **Business Logic**: The currency conversion factor calculation `double result = amount * 11.0`.
+*   **View (User Interface)**:
+    *   **Layout**: [activity_main.xml](file:///C:/Users/thinkpad/AndroidStudioProjects/CurrencyConverter/app/src/main/res/layout/activity_main.xml) describes the screen arrangement including the input box (`EditText`), compute button (`Button`), conversion output display (`TextView`), and the scrollable list (`ListView`).
+    *   **Styles & Tokens**: Defined in XML drawable custom shapes like [edit_text_style.xml](file:///C:/Users/thinkpad/AndroidStudioProjects/CurrencyConverter/app/src/main/res/drawable/edit_text_style.xml) and colors in [colors.xml](file:///C:/Users/thinkpad/AndroidStudioProjects/CurrencyConverter/app/src/main/res/values/colors.xml).
+*   **Controller (Intermediary)**:
+    *   **Binding & Logic Coordinator**: [MainActivity.java](file:///C:/Users/thinkpad/AndroidStudioProjects/CurrencyConverter/app/src/main/java/com/example/devise/MainActivity.java) connects the View's elements to code variables via `findViewById()`.
+    *   **Event Handling**: Listens for click events via `setOnClickListener` on the compute button, validates the inputs, invokes the model conversion logic, updates the result display, and notifies the list view adapter (`ArrayAdapter.notifyDataSetChanged()`) to render the updated history list.
 
 ---
 
